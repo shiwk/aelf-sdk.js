@@ -1,15 +1,21 @@
 var Aelf = require('./lib/aelf.js');
-var aelf = new Aelf(new Aelf.providers.HttpProvider("http://localhost:1234/chain"));
-aelf.chain.connectChain();
+// var Aelf = require('aelf-sdk');
 // var aelf = new Aelf(new Aelf.providers.HttpProvider("http://192.168.197.23:8000/chain"));
+var aelf = new Aelf(new Aelf.providers.HttpProvider("http://192.168.197.33:8000/chain"));
+// var aelf = new Aelf(new Aelf.providers.HttpProvider("http://localhost:1234/chain"));
+aelf.chain.connectChain();
 // var aelf = new Aelf(new Aelf.providers.HttpProvider("http://172.31.5.155:8000/chain"));
 
+aelf.chain.getBlockHeight(function (err, result) {
+    console.log(err, result);
+});
+return;
+
+// console.log(aelf.chain.getBlockHeight());
 // var tokenc = aelf.chain.getContractAbi('0x75b19ac4415c072512d011634ac86a9c58cf');
 // aelf.chain.connectChain(function (err, result) {
 //     console.log('connectChain: ', err, result);
 // });
-
-aelf.chain.connectChain();
 
 // var tokenc = aelf.chain.contractAt('0x75b19ac4415c072512d011634ac86a9c58cf');
 // var wallet = Aelf.wallet.getWalletByPrivateKey('30e65ca0db9bba3242086af94fd15123fdda29e392e4d3250279f38d694326c0');
@@ -54,8 +60,8 @@ aelf.chain.connectChain();
 // });
 
 // 获取区块信息3
-var transations031 = aelf.chain.getTxsResultByBlockhash(
-    '0d0d7dd9dd6fafbc176d900a1d78dc7a1aa2ecebfe72e6d22d2d9c3e84a5ee9d',
+var transations031 = aelf.chain.getTxsResult(
+    '43cbd43676a16a246622bf137b2cb28a3fa908e93377ca6579c589ba0fdd0add',
     0,
     100
 );
