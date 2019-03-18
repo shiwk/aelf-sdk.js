@@ -22,10 +22,31 @@ var proto = require('../lib/aelf/proto');
 var wal = require('../lib/aelf/wallet');
 var elliptic = require('elliptic');
 var ec = new elliptic.ec('secp256k1');
-var wallet = wal.getWalletByPrivateKey('bdb3b39ef4cd18c2697a920eb6d9e8c3cf1a930570beb37d04fb52400092c42b');
-var aelf = new Aelf(new Aelf.providers.HttpProvider("http://localhost:1234/chain"));
+var wallet = wal.getWalletByPrivateKey('7c2627b14e41b7aa2998c1125b9a9b74f682a45438cf4c8566a9ec0465a00a7f');
+var aelf = new Aelf(new Aelf.providers.HttpProvider("http://localhost:8000/chain"));
 // var aelf = new Aelf(new Aelf.providers.HttpProvider("http://192.168.199.210:5000/chain"));
 aelf.chain.connectChain();
+var tokenContract = aelf.chain.contractAt('3AhZRe8RvTiZUBdcqCsv37K46bMU2L2hH81JF8jKAnAUup9', wallet);
+var crossChainContract = aelf.chain.contractAt('2ErQEpj6v63LRSBwijZkHQVkRt1JH6P5Tuz6a6Jzg5DDiDF', wallet);
+
+//tokenContract.Initialize('ELF', 'ELF Token', 100000, 0);
+var sideChainInfo = {
+    'IndexingPrice' : 1,
+    'LockedTokenAmount' : 20,
+    'ResourceBalances' : [{"Type":"CPU","Amount":1},{"Type":"Ram","Amount":1},{"Type":"Net","Amount":1}],
+    'Proposer' : '2ttnmC14FcoLe8dgwsJBSHYH5mgT5uwa6bbyG4HQeinKX4E',
+    'ContractCode' : '4d5a90000300'
+};
+//tokenContract.Approve('2ErQEpj6v63LRSBwijZkHQVkRt1JH6P5Tuz6a6Jzg5DDiDF', 100);
+tokenContract.Create2('ELF', 0, true, '2ttnmC14FcoLe8dgwsJBSHYH5mgT5uwa6bbyG4HQeinKX4E','ELF', 100000);
+crossChainContract.Initialize("3sXEJQhEYUXaYgtdX4aePekYeM8yTkgtQ4T1wff2XhawjF6", "3AhZRe8RvTiZUBdcqCsv37K46bMU2L2hH81JF8jKAnAUup9", 0);
+tokenContract.Issue2('ELF', 100000, '2ttnmC14FcoLe8dgwsJBSHYH5mgT5uwa6bbyG4HQeinKX4E', 'Init');
+tokenContract.Approve2('ELF', 100, '2ErQEpj6v63LRSBwijZkHQVkRt1JH6P5Tuz6a6Jzg5DDiDF');
+crossChainContract.RequestChainCreation(sideChainInfo);
+crossChainContract.CreateSideChain(2750978);
+
+var aelf_side = new Aelf(new Aelf.providers.HttpProvider("http://localhost:8010/chain"));
+aelf_side.chain.connectChain();
 
 // var aelf = new Aelf(new Aelf.providers.HttpProvider("http://localhost:1234/chain"));
 // var aelf = new Aelf(new Aelf.providers.HttpProvider("http://192.168.197.70:8001/chain"));
