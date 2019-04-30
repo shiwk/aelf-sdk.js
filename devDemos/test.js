@@ -58,8 +58,7 @@ var tokenContract_bp1 = aelf.chain.contractAt('4rkKQpsRFt1nU6weAHuJ6CfQDqo6dxruU
 var crossChainSystemName = sha256(Buffer.from('AElf.ContractNames.CrossChain', 'utf8'));
 contractZero.GetContractAddressByName({"Value": Buffer.from(crossChainSystemName, 'hex')});
 
-var crossChainContractAddress ='R8nWLhsyLsY9Di4ULKQ41ddV8j1HbLikT3RjbLBDPGxnJFCv3';
-var crossChainContract = aelf.chain.contractAt(crossChainContractAddress, wallet);
+var crossChainContractAddress ='R8nWLhsyLsY9Di4ULKQ41ddV8j1HbLikT3RjbLBDPGxnJFCv3'; var crossChainContract = aelf.chain.contractAt(crossChainContractAddress, wallet);
 tokenContract.GetBalance({'symbol': 'ELF', 'owner' : '569JPjr9hSrzJFdEqQCpHtEsakM61MsgDBjoU4Fkm9GSSLV'});
 tokenContract.Approve({'symbol':'ELF', 'amount': 10000, 'spender':crossChainContractAddress});
 
@@ -72,7 +71,7 @@ var sideChainInfo = {
 
 crossChainContract.RequestChainCreation(sideChainInfo);
 
-var proposalId = 'bf78a0504aec0e88e2558b764ad6a44d61b4d9693154c919ebd13b49358282e8'; var approveInput = {'proposalId' : proposalId};
+var proposalId = 'c090acf4e211ab4c38aa6daa71d66c3947a5cbd10f2938fe814c7a200e631a6d'; var approveInput = {'proposalId' : proposalId};
 var parliamentSystemName = sha256(Buffer.from('AElf.ContractsName.Parliament', 'utf8')); contractZero.GetContractAddressByName({"Value": Buffer.from(parliamentSystemName, 'hex')});
 var parliamentContractAddress = 'x7G7VYqqeVAH8aeAsb7gYuTQ12YS1zKuxur9YES3cUj72QMxJ'; var parliamentContract = aelf.chain.contractAt(parliamentContractAddress, wallet); var parliamentContract_1 = aelf.chain.contractAt(parliamentContractAddress, wallet_bp1); var parliamentContract_2 = aelf.chain.contractAt(parliamentContractAddress, wallet_bp2);
 parliamentContract.Approve(approveInput);
@@ -80,6 +79,16 @@ parliamentContract_1.Approve(approveInput);
 parliamentContract_2.Approve(approveInput);
 
 crossChainContract.GetChainStatus({'Value':2750978});
+var tx = {
+    "From": "x6kmAZy7CUm1zwUBG6MMawBSkteiJte7tkJt4G9GuWxx6aYQj",
+        "To": "R8nWLhsyLsY9Di4ULKQ41ddV8j1HbLikT3RjbLBDPGxnJFCv3",
+        "RefBlockNumber": "321",
+        "RefBlockPrefix": "b5dJww==",
+        "MethodName": "GetChainStatus",
+        "Params": "CITozwI=",
+        "Signature": "OsjuP5ds9WktwTjmjCAIU6gBViuzxtxJyi8GGbMbY+pIkF68MHureDVw8muZi8FWBE+GBmTkLEJzMZ9JFf91JQA="
+};
+var payload = aelf.chain.transactionPayload(tx); console.log(payload);
 // crossChainContract.CreateSideChain({'Value':2816514});
 var main_height =52;
 var merklePath_main_chain = aelf.chain.getMerklePath('b3d2da4313c0ce469a63ec8bce4daa467335005a28f98c37b27ddb6b08e352ab', main_height);
