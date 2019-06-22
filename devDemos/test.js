@@ -50,7 +50,7 @@ var contractZero = aelf.chain.contractAt('2gaQh4uxg6tzyH1ADLoDxvHA14FMpzEiMqsQ6s
 var tokenSystemName = sha256(Buffer.from('AElf.ContractNames.Token', 'utf8'));
 contractZero.GetContractAddressByName({"Value": Buffer.from(tokenSystemName, 'hex')});
 
-var tokenContract = aelf.chain.contractAt('2J9wWhuyz7Drkmtu9DTegM9rLmamjekmRkCAWz5YYPjm7akfbH', wallet);
+var tokenContract = aelf.chain.contractAt('WnV9Gv3gioSh3Vgaw8SSB96nV8fWUNxuVozCf6Y14e7RXyGaM', wallet);
 var tokenContract_bp1 = aelf.chain.contractAt('4rkKQpsRFt1nU6weAHuJ6CfQDqo6dxruU3K3wNUFr6ZwZYc', wallet_bp1);
 
 //tokenContract.Issue(            'ELF', 1000000, 'ELF token', '2ttnmC14FcoLe8dgwsJBSHYH5mgT5uwa6bbyG4HQeinKX4E');
@@ -58,23 +58,23 @@ var tokenContract_bp1 = aelf.chain.contractAt('4rkKQpsRFt1nU6weAHuJ6CfQDqo6dxruU
 var crossChainSystemName = sha256(Buffer.from('AElf.ContractNames.CrossChain', 'utf8'));
 contractZero.GetContractAddressByName({"Value": Buffer.from(crossChainSystemName, 'hex')});
 
-var crossChainContractAddress ='R8nWLhsyLsY9Di4ULKQ41ddV8j1HbLikT3RjbLBDPGxnJFCv3'; var crossChainContract = aelf.chain.contractAt(crossChainContractAddress, wallet);
-tokenContract.GetBalance({'symbol': 'ELF', 'owner' : '569JPjr9hSrzJFdEqQCpHtEsakM61MsgDBjoU4Fkm9GSSLV'});
-tokenContract.Approve({'symbol':'ELF', 'amount': 10000, 'spender':crossChainContractAddress});
+var crossChainContractAddress ='25CecrU94dmMdbhC3LWMKxtoaL4Wv8PChGvVJM6PxkHAyvXEhB'; var crossChainContract = aelf.chain.contractAt(crossChainContractAddress, wallet);
+tokenContract.GetBalance({'symbol': 'ELF', 'owner' : crossChainContractAddress});
+tokenContract.Approve({'symbol':'ELF', 'amount': 1000000, 'spender': crossChainContractAddress});
 
 var sideChainInfo = {
     'indexingPrice' : 1,
-    'lockedTokenAmount' : 2000,
+    'lockedTokenAmount' : 20000,
     'resourceBalances' : [{"Type":"CPU","Amount":1},{"Type":"Ram","Amount":1},{"Type":"Net","Amount":1}],
     'contractCode' : '4d5a90000300'
 };
 
 crossChainContract.RequestChainCreation(sideChainInfo);
 
-var proposalId = 'c090acf4e211ab4c38aa6daa71d66c3947a5cbd10f2938fe814c7a200e631a6d'; var approveInput = {'proposalId' : proposalId};
 var parliamentSystemName = sha256(Buffer.from('AElf.ContractsName.Parliament', 'utf8')); contractZero.GetContractAddressByName({"Value": Buffer.from(parliamentSystemName, 'hex')});
-var parliamentContractAddress = 'x7G7VYqqeVAH8aeAsb7gYuTQ12YS1zKuxur9YES3cUj72QMxJ'; var parliamentContract = aelf.chain.contractAt(parliamentContractAddress, wallet); var parliamentContract_1 = aelf.chain.contractAt(parliamentContractAddress, wallet_bp1); var parliamentContract_2 = aelf.chain.contractAt(parliamentContractAddress, wallet_bp2);
-parliamentContract.Approve(approveInput);
+var parliamentContractAddress = 'R8nWLhsyLsY9Di4ULKQ41ddV8j1HbLikT3RjbLBDPGxnJFCv3'; var parliamentContract = aelf.chain.contractAt(parliamentContractAddress, wallet); var parliamentContract_1 = aelf.chain.contractAt(parliamentContractAddress, wallet_bp1); var parliamentContract_2 = aelf.chain.contractAt(parliamentContractAddress, wallet_bp2);
+
+var proposalId = 'f2992285bad9742a6e7b8104e67a6caae45dcfaea3c359773021858999d73de1'; var approveInput = {'proposalId' : proposalId}; parliamentContract.Approve(approveInput);
 parliamentContract_1.Approve(approveInput);
 parliamentContract_2.Approve(approveInput);
 
@@ -124,7 +124,7 @@ crosschainContract_side1.VerifyTransaction(verificationInput);
 var side_1_height = 241;
 var merklePath_side_chain_1 = aelf_side1.chain.getMerklePath('9aca860bffefd27f5d923162a3a4b40992081f5dcfd4f765150a4144d761af41', side_1_height);
 merklePath_side_chain_1.forEach(function (path) {console.log(path.toString('hex'));});
-crosschainContract_side1.GetBoundParentChainHeightAndMerklePathByHeight({'Value': side_1_height});
+crosschainContract_side1.GetBoundParentChainHeightAndMerklePathByHeight({'Value':   });
 
 var verificationInput_side_chain_1 = {
     'transactionId' : '9aca860bffefd27f5d923162a3a4b40992081f5dcfd4f765150a4144d761af41',
