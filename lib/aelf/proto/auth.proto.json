@@ -99,7 +99,7 @@
     },
     "Address": {
       "fields": {
-        "Value": {
+        "value": {
           "type": "bytes",
           "id": 1
         }
@@ -107,7 +107,7 @@
     },
     "Hash": {
       "fields": {
-        "Value": {
+        "value": {
           "type": "bytes",
           "id": 1
         }
@@ -115,7 +115,7 @@
     },
     "SInt32Value": {
       "fields": {
-        "Value": {
+        "value": {
           "type": "sint32",
           "id": 1
         }
@@ -123,7 +123,7 @@
     },
     "SInt64Value": {
       "fields": {
-        "Value": {
+        "value": {
           "type": "sint64",
           "id": 1
         }

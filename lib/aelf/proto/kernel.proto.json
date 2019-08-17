@@ -3,6 +3,38 @@
     "csharp_namespace": "AElf.Kernel"
   },
   "nested": {
+    "Transaction": {
+      "fields": {
+        "from": {
+          "type": "Address",
+          "id": 1
+        },
+        "to": {
+          "type": "Address",
+          "id": 2
+        },
+        "refBlockNumber": {
+          "type": "int64",
+          "id": 3
+        },
+        "refBlockPrefix": {
+          "type": "bytes",
+          "id": 4
+        },
+        "methodName": {
+          "type": "string",
+          "id": 5
+        },
+        "params": {
+          "type": "bytes",
+          "id": 6
+        },
+        "signature": {
+          "type": "bytes",
+          "id": 10000
+        }
+      }
+    },
     "TransactionStatus": {
       "values": {
         "UnknownTransactionStatus": 0,
@@ -530,7 +562,7 @@
     },
     "Address": {
       "fields": {
-        "Value": {
+        "value": {
           "type": "bytes",
           "id": 1
         }
@@ -538,7 +570,7 @@
     },
     "Hash": {
       "fields": {
-        "Value": {
+        "value": {
           "type": "bytes",
           "id": 1
         }
@@ -546,7 +578,7 @@
     },
     "SInt32Value": {
       "fields": {
-        "Value": {
+        "value": {
           "type": "sint32",
           "id": 1
         }
@@ -554,41 +586,9 @@
     },
     "SInt64Value": {
       "fields": {
-        "Value": {
+        "value": {
           "type": "sint64",
           "id": 1
-        }
-      }
-    },
-    "Transaction": {
-      "fields": {
-        "From": {
-          "type": "Address",
-          "id": 1
-        },
-        "To": {
-          "type": "Address",
-          "id": 2
-        },
-        "RefBlockNumber": {
-          "type": "int64",
-          "id": 3
-        },
-        "RefBlockPrefix": {
-          "type": "bytes",
-          "id": 4
-        },
-        "MethodName": {
-          "type": "string",
-          "id": 5
-        },
-        "Params": {
-          "type": "bytes",
-          "id": 6
-        },
-        "Signature": {
-          "type": "bytes",
-          "id": 10000
         }
       }
     },
